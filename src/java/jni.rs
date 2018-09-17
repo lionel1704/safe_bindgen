@@ -494,7 +494,7 @@ pub fn generate_jni_callback(cb: &ast::BareFnTy, cb_name: &str, context: &mut Co
                         .ok_or_else(|| From::from("no JVM reference found"))
                         .and_then(|vm| vm.attach_current_thread_as_daemon())
                 );
-                let cb = jni_unwrap!(convert_cb_from_java(&env, ctx));
+                let cb = jni_unwrap!(Ok(convert_cb_from_java(&env, ctx)));
 
                 #(#stmts);*
 
